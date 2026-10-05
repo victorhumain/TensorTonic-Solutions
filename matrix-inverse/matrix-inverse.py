@@ -16,7 +16,7 @@ def matrix_inverse(A: list) -> np.ndarray | None:
             print(i)
             return None
         #swapper les lignes 
-        A_aug[[i, pivot_row]] = A_aug[[i, pivot_row]]
+        A_aug[[i, pivot_row]] = A_aug[[pivot_row,i]]
         A_aug[i]  = A_aug[i]/A_aug[i][i]
         for j in range(n):
             if(j!=i):
