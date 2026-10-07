@@ -9,16 +9,10 @@ def batch_generator(X: list, y: list, batch_size: int, seed: int = 42, drop_last
     n = len(X)
     inds = np.arange(n)
     rng.shuffle(inds)
-    print(inds)
     for i in range(0,n,batch_size):
-        if (i+ batch_size)>n:
-            if drop_last: 
-                pass
-            else:
-                x_batch = X[inds[i:n]]
-                y_batch = y[inds[i:n]]
-                yield (x_batch,y_batch)
-        else :  
-            x_batch = X[inds[i:i+batch_size]]
-            y_batch = y[inds[i:i+batch_size]]
-            yield(x_batch,y_batch)
+        batchs_inds = inds[i:i+batch_size]
+        if drop_last and batchs_inds.size <batch_size:
+            break
+        x_batch = X[batchs_inds]
+        y_batch = y[batchs_inds]
+        yield(x_batch,y_batch)
